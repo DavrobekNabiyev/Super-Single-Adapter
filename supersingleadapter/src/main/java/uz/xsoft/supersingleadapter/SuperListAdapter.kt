@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 
-abstract class SuperListAdapter<T>(
+abstract class SuperListAdapter<T : Any>(
     private val viewId: Int,
     diffUtil: DiffUtil.ItemCallback<T>
 ) : ListAdapter<T, SuperListAdapter<T>.MyHolder>(diffUtil) {
@@ -36,7 +36,7 @@ abstract class SuperListAdapter<T>(
         holder.bindHolder()
     }
 
-    inner class MyHolder(val view: View) : RecyclerView.ViewHolder(view) {
+    inner class MyHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         fun bindHolder() {
             bind(getItem(adapterPosition), view, adapterPosition)
         }
